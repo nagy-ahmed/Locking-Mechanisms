@@ -13,10 +13,6 @@ class TestAndSetLock:
             self.flag = True
             return old_flag
 
-    def release(self):
-        with self.lock:
-            self.flag = False
-
 class Process(threading.Thread):
     def __init__(self, process_id, lock):
         super(Process, self).__init__()
@@ -31,7 +27,7 @@ class Process(threading.Thread):
         print(f"Process {self.process_id} is performing operation on shared resource...")
         time.sleep(random.uniform(2, 3))  #some work
         print(f"Process {self.process_id} exited the critical section.")
-        self.lock.release()
+        self.lock.flag=False
 
 def main():
     lock = TestAndSetLock()
