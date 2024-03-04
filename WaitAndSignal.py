@@ -4,6 +4,7 @@ import time
 
 class WaitSignalLock:
     def __init__(self):
+        #Condition objects allow multiple threads to synchronize based on the state of an associated lock
         self.condition = threading.Condition()
         self.is_locked = False
 
